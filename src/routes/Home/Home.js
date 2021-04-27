@@ -2,6 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import styled from "styled-components"
 import Movie from "../../components/Movie";
 import Sidebar from "../../components/Sidebar";
+import { Link } from "react-router-dom"
 
 
 const GET_MOVIES = gql`
@@ -13,6 +14,7 @@ const GET_MOVIES = gql`
       summary
       date_uploaded
       medium_cover_image
+      description_intro
     }
   }
 `;
@@ -28,11 +30,14 @@ const Header = styled.header`
     display: grid;
     grid-template-columns: 1fr 100px;
     width: 100%;
+    display: block-inline;
 `;
 
 const Logo = styled.h1`
-    color: red;
     font-family: Helvetica, sans-serif;
+    padding-bottom: 50px;
+    border-bottom: 1px solid gray;
+    color: #e84118;
 `;
 
 const Loading = styled.div`
@@ -58,7 +63,8 @@ export default () => {
     return (
         <Container>
             <Header>
-                <Logo>Tistory</Logo> 
+                <Logo><Link to="/">Tistory</Link></Logo>
+                <Sidebar />
             </Header>
             {loading && <Loading>Loading...</Loading>}
                 <Movies>
@@ -70,6 +76,7 @@ export default () => {
                         rating={m.rating}
                         summary={m.summary}
                         day={m.date_uploaded}
+                        des={m.description_intro}
                         />
                     ))}    
                 </Movies>

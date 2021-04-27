@@ -10,7 +10,7 @@ function App() {
     <Route exact path="/" component={Home}/>
     <Route exact path="/search" component={Search} />
     <Route exact path="/:id" component={Detail}/>
-    <Route exact path="/refresh" component={Refresh}/>
+    <Route exact path="/:id/refresh" component={Refresh}/>
   </Router>
 }
   

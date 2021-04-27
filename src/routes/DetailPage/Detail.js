@@ -52,9 +52,9 @@ const Column = styled.div`
 `;
 
 const Title = styled.h1`
-  color: red;
   font-size: 40px;
   margin-bottom: 15px;
+  color: red;
 `;
 
 const Subtitle = styled.h4`
@@ -86,7 +86,7 @@ const Detail = () => {
     console.log(data);
     return (
         <Container>
-          <Logo>Tistory</Logo>
+          <Logo><Link to="/">Tistory</Link></Logo>
           <Column>
             <Title>{loading ? "Loading..." : `${data.movie.title} ${data.movie.isLiked ? "":""}`}</Title>
                 <Subtitle>
@@ -94,7 +94,7 @@ const Detail = () => {
                 </Subtitle>
                 <Description>{data?.movie?.description_intro}</Description>
             </Column>
-           <Poster bg={data?.movie?.medium_cover_image}></Poster>
+          <Poster bg={data?.movie?.description_intro}></Poster>
         </Container>
       );
 };
