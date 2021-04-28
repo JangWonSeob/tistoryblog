@@ -2,8 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { gql, useQuery } from '@apollo/client';
 import styled from "styled-components";
-import Sidebar from "../../components/Sidebar";
-import { Link } from 'react-router-dom';
 
 const GET_MOVIE = gql`
   query getMovie($id: Int!) {
@@ -16,6 +14,7 @@ const GET_MOVIE = gql`
       rating    
       summary
       isLiked @client
+      date_uploaded
     }
     suggestions(id: $id){
         id
@@ -74,11 +73,13 @@ const Poster = styled.div`
   background-size: cover;
   background-position: center center;
 `;
+const Update = styled.div`
+
+`;
 
 
 
-
-const Detail = () => {
+const Detail =() => {
     const { id } = useParams();
     const { loading, data } = useQuery(GET_MOVIE, {
       variables: { id: parseInt(id) }
@@ -86,17 +87,18 @@ const Detail = () => {
     console.log(data);
     return (
         <Container>
-          <Logo><Link to="/">Tistory</Link></Logo>
           <Column>
-            <Title>{loading ? "Loading..." : `${data.movie.title} ${data.movie.isLiked ? "":""}`}</Title>
+            <Title>{loading ? "Loading..." : `${data.movie.title}`}</Title>
+            <Update>{data.movie.date_uploaded}</Update>
                 <Subtitle>
                     {data?.movie?.language} · {data?.movie?.rating}
                 </Subtitle>
                 <Description>{data?.movie?.description_intro}</Description>
             </Column>
-          <Poster bg={data?.movie?.description_intro}></Poster>
+          <Poster bg={data?.movie?.medium_cover_image}></Poster>
         </Container>
       );
 };
 
 export default Detail;
+

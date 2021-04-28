@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client';
 import styled from "styled-components"
 import Movie from "../../components/Movie";
-import Sidebar from "../../components/Sidebar";
-import { Link } from "react-router-dom"
+import Tabs from '../../components/Tabs';
+import React, { useState, useEffect } from "react";
 
 
 const GET_MOVIES = gql`
@@ -33,13 +33,6 @@ const Header = styled.header`
     display: block-inline;
 `;
 
-const Logo = styled.h1`
-    font-family: Helvetica, sans-serif;
-    padding-bottom: 50px;
-    border-bottom: 1px solid gray;
-    color: #e84118;
-`;
-
 const Loading = styled.div`
     font-size: 18px;
     opacity: 0.5;
@@ -57,14 +50,25 @@ const Movies =styled.div`
     width: 60%;
 `;
 
-export default () => {
+const useTitle = (initialTitle) => {
+    const [title, setTitle] = useState(initialTitle);
+    const updateTItle = () => {
+      const htmlTitle = document.querySelector("title");
+      htmlTitle.innerHTML = title;
+    };
+    useEffect(updateTItle, [title]);
+    return setTitle;
+  };
+
+const Home = () => {
+    const titleUpdater = useTitle("Loading...");
+    setTimeout(() => titleUpdater("Tistory"));
     const { loading, data } = useQuery(GET_MOVIES);
     console.log(data);
     return (
         <Container>
             <Header>
-                <Logo><Link to="/">Tistory</Link></Logo>
-                <Sidebar />
+            <Tabs/>
             </Header>
             {loading && <Loading>Loading...</Loading>}
                 <Movies>
@@ -83,3 +87,5 @@ export default () => {
         </Container>
     );
 };
+
+export default Home;
