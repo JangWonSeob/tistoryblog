@@ -74,6 +74,7 @@ const Poster = styled.div`
   background-position: center center;
 `;
 const Update = styled.div`
+  font-size: 15px;
 
 `;
 
@@ -89,7 +90,7 @@ const Detail =() => {
         <Container>
           <Column>
             <Title>{loading ? "Loading..." : `${data.movie.title}`}</Title>
-            <Update>{data.movie.date_uploaded}</Update>
+            <Update>{data?.movie?.date_uploaded}</Update>
                 <Subtitle>
                     {data?.movie?.language} · {data?.movie?.rating}
                 </Subtitle>

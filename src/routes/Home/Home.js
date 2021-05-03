@@ -82,7 +82,7 @@ const Home = () => {
                         day={m.date_uploaded}
                         des={m.description_intro}
                         />
-                    ))}    
+                    ))}
                 </Movies>
         </Container>
     );
